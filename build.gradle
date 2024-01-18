@@ -1,4 +1,8 @@
 plugins {
+    // Adds the Kotlin Gradle plugin
+    id 'org.jetbrains.kotlin.jvm' version '1.9.20'
+    id 'org.jetbrains.kotlin.plugin.serialization' version '1.9.20'
+
     id 'eclipse'
     id 'idea'
     id 'maven-publish'
@@ -113,6 +117,10 @@ minecraft {
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 repositories {
+    maven {
+        name = 'Kotlin for Forge'
+        url = 'https://thedarkcolour.github.io/KotlinForForge/'
+    }
     // Put repositories for dependencies here
     // ForgeGradle automatically adds the Forge maven and Maven Central for you
 
@@ -130,6 +138,10 @@ dependencies {
     // If the group id is "net.minecraft" and the artifact id is one of ["client", "server", "joined"],
     // then special handling is done to allow a setup of a vanilla dependency without the use of an external repository.
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
+
+    // Adds KFF as dependency and Kotlin libs (use the variant matching your mod loader)
+    // FORGE
+    implementation 'thedarkcolour:kotlinforforge:4.7.0'
 
     // Example mod dependency with JEI - using fg.deobf() ensures the dependency is remapped to your development mappings
     // The JEI API is declared for compile time use, while the full JEI artifact is used at runtime
